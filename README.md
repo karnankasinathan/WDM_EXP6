@@ -51,7 +51,12 @@ sklearn to demonstrate Information Retrieval using the Vector Space Model.
 
 ###### Calculate cosine similarity between query and documents
     def search(query, tfidf_matrix, tfidf_vectorizer):
-        //TYPE YOUR CODE HERE
+    preprocessed_query = preprocess_text(query)
+    query_vector = tfidf_vectorizer.transform([preprocessed_query])
+    similarity_scores = cosine_similarity(query_vector, tfidf_matrix)
+    sorted_indexes = similarity_scores.argsort()[0][::-1]
+    results=[(list(preprocessed_docs.keys())[i], list(documents.values())[i], similarity_scores[0,i]) for i in sorted_indexes]
+    return results
 
 ###### Get input from user
     query = input("Enter your query: ")
@@ -74,4 +79,7 @@ sklearn to demonstrate Information Retrieval using the Vector Space Model.
 
 ### Output:
 
+![Screenshot 2024-09-28 153447](https://github.com/user-attachments/assets/2ac9f339-452a-475a-8b8f-75138e586e32)
+
 ### Result:
+Thus the implementation Information Retrieval Using Vector Space Model in Python is successfullly executed.
